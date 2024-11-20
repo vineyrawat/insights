@@ -7,7 +7,7 @@ import ibis.backends
 import ibis.backends.duckdb
 from frappe.query_builder.functions import IfNull
 from frappe.utils import get_files_path
-from frappe.utils.background_jobs import is_job_enqueued
+# from frappe.utils.background_jobs import is_job_enqueued
 from ibis import BaseBackend, _
 from ibis.expr.types import Expr
 
@@ -113,15 +113,15 @@ class WarehouseTableImporter:
     def enqueue_import(self):
         job_id = f"import_{frappe.scrub(self.table.data_source)}_{frappe.scrub(self.table.table_name)}"
 
-        if is_job_enqueued(job_id) or self.import_in_progress():
-            create_toast(
-                f"Import for {frappe.bold(self.table.table_name)} is in progress."
-                "You may not see the results till the import is completed.",
-                title="Import In Progress",
-                type="info",
-                duration=7,
-            )
-            return
+        # if is_job_enqueued(job_id) or self.import_in_progress():
+        #     create_toast(
+        #         f"Import for {frappe.bold(self.table.table_name)} is in progress."
+        #         "You may not see the results till the import is completed.",
+        #         title="Import In Progress",
+        #         type="info",
+        #         duration=7,
+        #     )
+        #     return
 
         frappe.enqueue(
             method="frappe.call",

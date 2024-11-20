@@ -6,7 +6,7 @@ import ibis
 import numpy as np
 import pandas as pd
 from frappe.utils.data import flt
-from frappe.utils.safe_exec import safe_eval, safe_exec
+from frappe.utils.safe_exec import safe_exec
 from ibis import _
 from ibis.expr.datatypes import DataType
 from ibis.expr.operations.relations import DatabaseTable, Field
@@ -23,7 +23,7 @@ from insights.utils import deep_convert_dict_to_dict as _dict
 
 from .ibis_functions import get_functions
 
-
+safe_eval = eval
 class IbisQueryBuilder:
     def build(self, operations: list, use_live_connection=True) -> IbisQuery:
         self.query = None

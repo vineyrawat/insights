@@ -5,7 +5,8 @@
 from hashlib import md5
 
 import frappe
-from frappe.model.document import Document, bulk_insert
+# from frappe.model.document import Document, bulk_insert
+from frappe.model.document import Document
 
 from insights.insights.doctype.insights_data_source_v3.data_warehouse import Warehouse
 from insights.utils import InsightsDataSourcev3
@@ -40,8 +41,9 @@ class InsightsTablev3(Document):
             doc.table = table
             doc.label = table
             table_docs.append(doc)
+            doc.insert(ignore_if_duplicate=True)
 
-        bulk_insert("Insights Table v3", table_docs, ignore_duplicates=True)
+        # bulk_insert("Insights Table v3", table_docs, ignore_duplicates=True)
 
     @staticmethod
     def get_ibis_table(data_source, table_name, use_live_connection=False):
